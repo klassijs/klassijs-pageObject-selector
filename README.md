@@ -1,1 +1,1 @@
-# klassijs-pageobject-selector
+# klassijs pageObject Selector

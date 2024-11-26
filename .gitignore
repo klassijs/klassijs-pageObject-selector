@@ -1,0 +1,16 @@
+# Dependency directories
+# IntelliJ project files
+node_modules
+log
+node_modules/.modules.yaml
+
+.idea
+
+# vscode files
+.vscode
+
+# dotenv environment variables file
+.env
+.env.*
+
+eng.traineddata

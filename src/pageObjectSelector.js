@@ -7,19 +7,7 @@ const argv = yargs(hideBin(process.argv)).option('tags', {
   description: 'Tags to filter scenarios'
 }).argv;
 
-const ocr = require('./');
-const assertion = require('./');
-const search = require('./');
-const visualValidation = require('./');
-const accessibility = require('./');
-
-const pageObjectMap = {
-  '@assert': assertion,
-  '@optics': ocr,
-  '@search': search,
-  '@visual': visualValidation,
-  '@access': accessibility
-};
+const pageObjectMap = require('../shared-objects/pageObjectData');
 
 function setPageObject(commandLineTag) {
   console.log('Tag from command line:', commandLineTag);

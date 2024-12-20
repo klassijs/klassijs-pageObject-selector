@@ -7,7 +7,7 @@ const argv = yargs(hideBin(process.argv)).option('tags', {
   description: 'Tags to filter scenarios'
 }).argv;
 
-const pageObjectMap = require('../shared-objects/pageObjectData');
+const pageObjectMap = require('../../../shared-objects/pageObjectData');
 
 function setPageObject(commandLineTag) {
   console.log('Tag from command line:', commandLineTag);

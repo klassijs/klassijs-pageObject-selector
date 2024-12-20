@@ -1,3 +1,3 @@
-const {getActivePageObject} = require('./src/pageObjectSelector');
+const { getActivePageObject} = require('./src/pageObjectSelector');
 
-module.exports = {getActivePageObject};
+module.exports = { getActivePageObject };

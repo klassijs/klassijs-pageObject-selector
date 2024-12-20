@@ -1,13 +1,20 @@
 const { astellen } = require('klassijs-astellen');
 const { hideBin } = require('yargs/helpers');
 const yargs = require('yargs/yargs');
+const {Before} = require('@cucumber/cucumber')
 
 const argv = yargs(hideBin(process.argv)).option('tags', {
   type: 'string',
   description: 'Tags to filter scenarios'
 }).argv;
 
-const pageObjectMap = require('../../../shared-objects/pageObjectData');
+const pageObjectMap = require('../shared-objects/pageObjectData');
+
+let tagNames;
+
+Before((scenario) => {
+  tagNames = scenario.pickle.tags;
+});
 
 function setPageObject(commandLineTag) {
   console.log('Tag from command line:', commandLineTag);
@@ -21,7 +28,7 @@ function setPageObject(commandLineTag) {
 
 function getActivePageObject(scenario) {
   const tagFromCommandLine = argv.tags ? argv.tags : null;
-  for (const tag of scenario.pickle.tags) {
+  for (const tag of tagNames) {
     if (tag.name === '@runall'){
       astellen.set ('activePageObject', setPageObject(tagFromCommandLine));
     }

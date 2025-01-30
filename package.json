@@ -12,7 +12,7 @@
   },
   "private": true,
   "dependencies": {
-    "klassijs-astellen": "github:klassijs/klassijs-astellen",
+    "klassijs-astellen": "^1.0.0",
     "yargs": "^17.7.2"
   }
 }

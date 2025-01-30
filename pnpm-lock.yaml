@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       klassijs-astellen:
-        specifier: github:klassijs/klassijs-astellen
-        version: https://codeload.github.com/klassijs/klassijs-astellen/tar.gz/18d105f146ed692d055bdcc0c552de4b243813dd
+        specifier: ^1.0.0
+        version: 1.0.0
       yargs:
         specifier: ^17.7.2
         version: 17.7.2
@@ -51,9 +51,8 @@ packages:
     resolution: {integrity: sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==}
     engines: {node: '>=8'}
 
-  klassijs-astellen@https://codeload.github.com/klassijs/klassijs-astellen/tar.gz/18d105f146ed692d055bdcc0c552de4b243813dd:
-    resolution: {tarball: https://codeload.github.com/klassijs/klassijs-astellen/tar.gz/18d105f146ed692d055bdcc0c552de4b243813dd}
-    version: 1.0.0
+  klassijs-astellen@1.0.0:
+    resolution: {integrity: sha512-os8x9WSkBmPgIsYStku87VcqahBoNVxcCHzn7tgoDnUmuYJu/jNfn3E+NVVsRf8rD9wtxrMRy5Hid/1MJh6dKg==}
 
   require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
@@ -111,7 +110,7 @@ snapshots:
 
   is-fullwidth-code-point@3.0.0: {}
 
-  klassijs-astellen@https://codeload.github.com/klassijs/klassijs-astellen/tar.gz/18d105f146ed692d055bdcc0c552de4b243813dd: {}
+  klassijs-astellen@1.0.0: {}
 
   require-directory@2.1.1: {}
 

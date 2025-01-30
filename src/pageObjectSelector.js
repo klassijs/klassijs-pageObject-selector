@@ -8,29 +8,26 @@ const argv = yargs(hideBin(process.argv)).option('tags', {
   description: 'Tags to filter scenarios'
 }).argv;
 
-const pageObjectMap = require('../../../shared-objects/pageObjectData');
-
 let tagNames;
 
 Before((scenario) => {
   tagNames = scenario.pickle.tags;
 });
 
-function setPageObject(commandLineTag) {
-  console.log('Tag from command line:', commandLineTag);
+function setPageObject(commandLineTag, pageObjectMap) {
   if (commandLineTag && commandLineTag in pageObjectMap) {
-    console.log('Matching tag ============:', commandLineTag);
     return pageObjectMap[commandLineTag];
   } else {
     throw new Error('No matching page object found for tag: ' + commandLineTag);
   }
 }
 
-function getActivePageObject(scenario) {
+function getActivePageObject(scenario, pageObjectMap) {
   const tagFromCommandLine = argv.tags ? argv.tags : null;
   for (const tag of tagNames) {
     if (tag.name === '@runall'){
-      astellen.set ('activePageObject', setPageObject(tagFromCommandLine));
+      astellen.set ('activePageObject', setPageObject(tagFromCommandLine, pageObjectMap));
+      return setPageObject(tagFromCommandLine, pageObjectMap);
     }
   }
 }

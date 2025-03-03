@@ -25,7 +25,7 @@ function setPageObject(commandLineTag, pageObjectMap) {
 function getActivePageObject(scenario, pageObjectMap) {
   const tagFromCommandLine = argv.tags ? argv.tags : null;
   for (const tag of tagNames) {
-    if (tag.name === '@runall'){
+    if (tag.name !== '@runall'){
       astellen.set ('activePageObject', setPageObject(tagFromCommandLine, pageObjectMap));
       const activePageObject = astellen.get('activePageObject');
       return setPageObject(tagFromCommandLine, pageObjectMap);

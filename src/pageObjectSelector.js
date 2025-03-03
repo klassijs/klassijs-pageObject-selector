@@ -27,6 +27,7 @@ function getActivePageObject(scenario, pageObjectMap) {
   for (const tag of tagNames) {
     if (tag.name === '@runall'){
       astellen.set ('activePageObject', setPageObject(tagFromCommandLine, pageObjectMap));
+      const activePageObject = astellen.get('activePageObject');
       return setPageObject(tagFromCommandLine, pageObjectMap);
     }
   }

@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "@cucumber/cucumber": "^11.2.0",
     "klassijs-astellen": "^1.0.0",
     "yargs": "^17.7.2"
   }

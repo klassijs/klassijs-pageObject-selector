@@ -22,7 +22,7 @@ function setPageObject(commandLineTag, pageObjectMap) {
   }
 }
 
-function getActivePageObject(scenario, pageObjectMap) {
+function getActivePageObject(pageObjectMap) {
   const tagFromCommandLine = argv.tags ? argv.tags : null;
   for (const tag of tagNames) {
     if (tag.name !== '@runall'){

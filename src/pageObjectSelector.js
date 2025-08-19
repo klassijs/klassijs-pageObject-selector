@@ -1,7 +1,7 @@
 const { astellen } = require('klassijs-astellen');
 const { hideBin } = require('yargs/helpers');
 const yargs = require('yargs/yargs');
-const {Before} = require('@cucumber/cucumber')
+const { Before } = require('@cucumber/cucumber');
 
 const argv = yargs(hideBin(process.argv)).option('tags', {
   type: 'string',
@@ -11,12 +11,22 @@ const argv = yargs(hideBin(process.argv)).option('tags', {
 let tagNames;
 
 Before((scenario) => {
-  tagNames = scenario.pickle.tags;
+  if (scenario.pickle && scenario.pickle.tags) {
+    tagNames = scenario.pickle.tags;
+  } else if (scenario.tags) {
+    tagNames = scenario.tags;
+  } else if (scenario.gherkinDocument && scenario.gherkinDocument.feature) {
+    tagNames = scenario.gherkinDocument.feature.tags || [];
+  } else {
+    tagNames = [];
+  }
 });
 
-function setPageObject(commandLineTag, pageObjectMap) {
-  if (commandLineTag && commandLineTag in pageObjectMap) {
-    return pageObjectMap[commandLineTag];
+function setPageObject(commandLineTag, pageObjectMap, availableTags) {
+  const matchingTag = availableTags.find(tag => tag.name === commandLineTag);
+  
+  if (matchingTag && matchingTag.name in pageObjectMap) {
+    return pageObjectMap[matchingTag.name];
   } else {
     throw new Error('No matching page object found for tag: ' + commandLineTag);
   }
@@ -24,13 +34,26 @@ function setPageObject(commandLineTag, pageObjectMap) {
 
 function getActivePageObject(pageObjectMap) {
   const tagFromCommandLine = argv.tags ? argv.tags : null;
+  
+  if (!tagNames || !Array.isArray(tagNames)) {
+    throw new Error('No tags available. Make sure Before hook has been executed.');
+  }
+  
+  if (tagFromCommandLine) {
+    const activePageObject = setPageObject(tagFromCommandLine, pageObjectMap, tagNames);
+    astellen.set('activePageObject', activePageObject);
+    return activePageObject;
+  }
+  
   for (const tag of tagNames) {
-    if (tag.name !== '@runall'){
-      astellen.set ('activePageObject', setPageObject(tagFromCommandLine, pageObjectMap));
-      const activePageObject = astellen.get('activePageObject');
-      return setPageObject(tagFromCommandLine, pageObjectMap);
+    if (tag.name !== '@runall') {
+      const activePageObject = setPageObject(tag.name, pageObjectMap, tagNames);
+      astellen.set('activePageObject', activePageObject);
+      return activePageObject;
     }
   }
+  
+  throw new Error('No valid tags found. All tags are @runall.');
 }
 
 module.exports = { getActivePageObject };
